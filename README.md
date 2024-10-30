@@ -4,8 +4,8 @@ Steps to run locally:
 
 2. Clone the repo and change to the project directory
 ```
-git clone https://github.com/SDC-Spring-2024/sampleproject.git
-cd sampleproject
+git clone https://github.com/SDC-Fall-2024/Course-and-Degree-Requirements.git
+cd Course-and-Degree-Requirements
 ```
 
 4. Install node modules
