@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"no test specified\" && exit 0"
   },
   "dependencies": {
     "next": "^15.0.2",
