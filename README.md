@@ -1,4 +1,30 @@
-Steps to run locally:
+# Course and Degree Requirements (CDR)
+
+### Team Members
+- Charles Ding
+- Kellen ______
+- Landon Bakken
+
+### Goal
+Create a web app that simplifies degree and course requirements:
+- Use data from UW-Madison to get data on courses and degrees
+- Organize the collected data with a database
+- Be able to send the data to users efficiently
+- Display the data in a format that is intuitive
+
+### Tech Stack
+Data collection system:
+- Python
+
+Database:
+- still being decided
+
+Frontend:
+- React
+
+<br><br><br>
+
+# Steps to run locally:
 
 1. Make sure to have [Node](https://nodejs.org/en/download/package-manager) installed
 
