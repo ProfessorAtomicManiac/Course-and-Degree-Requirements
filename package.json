@@ -4,6 +4,7 @@
     "test": "echo \"no test specified\" && exit 0"
   },
   "dependencies": {
+    "@xyflow/react": "^12.3.5",
     "next": "^15.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
