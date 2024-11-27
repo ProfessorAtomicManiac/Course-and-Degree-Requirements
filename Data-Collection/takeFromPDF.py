@@ -20,10 +20,8 @@ with open("Data-Collection/Processed-Data/courseReqs.txt", 'w') as outputFile:
             requisites = [requisite.strip() for requisite in requisites] #get rid of spaces and such at start and end
 
             #get courses
-            pattern = r'—(.*?)credits\.' #course names are between a dash (usually) and credit count
+            pattern = r'—(.*?)credit' #course names are between a dash (usually) and credit count
             courses = re.findall(pattern, text, re.DOTALL)
-            pattern = r'—(.*?)credit\.' #course names are between a dash (usually) and credit count
-            courses.extend(re.findall(pattern, text, re.DOTALL))
             courses = [course.replace("\xa0", " ") for course in courses] #get rid of non-breaking spaces
             courses = [course.replace("\n", " ") for course in courses] #get rid of un-needed breaks
             courses = [" ".join(course.split(" ")[:len(course.split(" ")) - 2]) for course in courses] #get rid of trailing credit amount
@@ -36,11 +34,13 @@ with open("Data-Collection/Processed-Data/courseReqs.txt", 'w') as outputFile:
                     courseCount += 1
             else:
                 errors += 1
+                errorFile.write(f"{len(courses)} Courses to {len(requisites)} requisites")
+                errorFile.write("\n\n")
                 errorFile.write(str(text))
                 errorFile.write("\n\n")
-                errorFile.write(str(requisites))
-                errorFile.write("\n\n")
                 errorFile.write(str(courses))
+                errorFile.write("\n\n")
+                errorFile.write(str(requisites))
                 errorFile.write("\n\n\n\n\n")
                 
             
