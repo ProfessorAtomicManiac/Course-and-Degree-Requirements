@@ -1,78 +1,69 @@
-import PyPDF2
-import json
+import fitz  # pip install PyMuPDF
 import re
+import json
 
-# Function to parse a single course's details from text
-def parse_course_details(course_text):
-    course_data = {}
-
-    print(course_text)
-    print("\n\n\n\n")
+def getPageData(page):
+    blocks = page.get_text("dict")["blocks"]
     
-    #get course code (CIV ENGR 890)
-    course_match = course_text.splitlines()[0].strip()
-    course_data["course"] = course_match if course_match else "Unknown"
+    courseInfos = {}
     
-    # get course title (MANAGERIAL ACCOUNTING)
-    #course_title_match = re.match(r"^(.*?)\s[–—-]\s(.+)$", course_text.splitlines()[0])
-    #course_data["course_title"] = course_title_match.group(2).strip() if course_title_match else "Unknown"
+    #go through blocks
+    for block in blocks:
+        #go through lines
+        if "lines" in block:
+            for line in block["lines"]:
+                
+                #go through spans
+                for span in line["spans"]:
+                    
+                    #get text info
+                    font_size = span["size"]
+                    font_name = span["font"]
+                    
+                    #if its bold, the right font size
+                    if font_size == 8 and "Bold" in font_name:
+                        
+                        #get rid of leading and trailing whitespace and spaces
+                        text = span["text"].replace("\xa0", " ").strip()
+                        
+                        #add to course_names if it isnt a course info header
+                        if text not in non_course_names:
+                            
+                            #if it doesnt have a number, add it to the prev course
+                            #this would happen if there was a newline mid course name
+                            if not bool(re.search(r'\d', text)):
+                                last_key = list(courseInfos.keys())[-1]
+                                courseInfos[last_key + " " + text] = courseInfos.pop(last_key)
+                            else:
+                                courseInfos[text] = {}
+    return courseInfos
+    
+def pdfToJson(pdf_path, json_path):
+    #open pdf and json files
+    pdf_file = fitz.open(pdf_path)
+    json_file = open(json_path, 'w', encoding="utf-8") #clears if it exists
+    
+    allCourseData = {}
+    
+    #go through pages
+    for page_num in range(len(pdf_file)):
+        page = pdf_file[page_num]
+        pageData = getPageData(page)
+        allCourseData.update(pageData)
+        
+    #put data into json
+    json.dump(allCourseData, json_file, indent=4, ensure_ascii=False)
+    
+    #clean up
+    pdf_file.close()
+    json_file.close()
+    
+        
 
-    # Extract credits (3 credits)
-    credits_match = re.search(r"(\d+-?\d*) credits?\.", course_text)
-    course_data["credits"] = credits_match.group(1) if credits_match else "Unknown"
-
-    # Extract requisites (E C E 210, 252)
-    requisites_match = re.search(r"Requisites: (.+?)\n", course_text)
-    course_data["requisites"] = requisites_match.group(1).strip() if requisites_match else "Unknown"
-
-    # Extract course designation
-    designation_match = re.search(r"Course Designation: (.+?)\n", course_text)
-    course_data["designation"] = designation_match.group(1).strip() if designation_match else "Unknown"
-
-    # Extract repeatable status
-    repeatable_match = re.search(r"Repeatable for Credit: (.+?)\n", course_text)
-    course_data["repeatable"] = repeatable_match.group(1).strip() if repeatable_match else "Unknown"
-
-    # Extract last taught (Fall 2024)
-    last_taught_match = re.search(r"Last Taught: (.+?)\n", course_text)
-    course_data["last_taught"] = last_taught_match.group(1).strip() if last_taught_match else "Unknown"
-
-    # Extract learning outcomes
-    outcomes = re.findall(r"Learning Outcomes: (\d+\..+?)(?=Audience|$)", course_text, re.DOTALL)
-    course_data["learning_outcomes"] = [outcome.replace("\n", "") for outcome in outcomes] if outcomes else "Unknown"
-
-    return course_data
-
-# Function to extract and parse courses from PDF
-def extract_courses_from_pdf(pdf_path):
-    courses = []
-
-    with open(pdf_path, "rb") as pdf_file:
-        reader = PyPDF2.PdfReader(pdf_file)
-
-        for page in reader.pages:
-            text = page.extract_text()
-
-            # Split courses by delimiter patterns (e.g., double newlines)
-            raw_courses = re.split(r"\n{2,}", text)
-
-            for raw_course in raw_courses:
-                # Skip small segments that aren't courses
-                if len(raw_course) < 100:
-                    continue
-
-                course_data = parse_course_details(raw_course)
-                courses.append(course_data)
-
-    return courses
-
-# Main execution
+# Usage example
 pdf_path = "Data-Collection/Raw-Data/2024-2025-spring-courses-cut.pdf"
-courses = extract_courses_from_pdf(pdf_path)
+json_path = "Data-Collection/Processed-Data/courses.json"
 
-# Save to JSON
-output_json = "courses.json"
-with open(output_json, "w") as json_file:
-    json.dump(courses, json_file, indent=4)
+non_course_names = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
 
-print(f"Extracted {len(courses)} courses and saved to {output_json}")
+pdfToJson(pdf_path, json_path)
