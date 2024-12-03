@@ -2,6 +2,18 @@ import fitz  # pip install PyMuPDF
 import re
 import json
 
+def formatRequisites(requisiteString):
+    #split by or
+    requisiteList = requisiteString.split(" or ")
+    #split by and
+    requisiteList = [requisite.split(" and ") for requisite in requisiteList]
+
+    #clean up
+    for requisiteListOr_index in range(len(requisiteList)):
+        requisiteList[requisiteListOr_index] = [requisite.strip() for requisite in requisiteList[requisiteListOr_index]]
+        
+    return requisiteList
+
 def getPageData(page):
     blocks = page.get_text("dict")["blocks"]
     
@@ -103,7 +115,15 @@ def getPageData(page):
             #removes the first one since it always starts with a number-period-space,
             #so it will have a blank element
             courseInfos[courseCode]["Learning Outcomes"] = re.split(r'\d+\.\s', courseInfos[courseCode]["Learning Outcomes"])[1:]
-            
+        
+        if "Requisites" in list(courseInfos[courseCode].keys()):
+            courseInfos[courseCode]["RequisiteString"] = courseInfos[courseCode]["Requisites"]
+            courseInfos[courseCode]["Requisites"] = formatRequisites(courseInfos[courseCode]["Requisites"])
+        else:
+            #if it doesnt have requirements, it isnt a course
+            #really only for like 2 weird cases at the start of the pdf
+            del courseInfos[courseCode]
+        
     return courseInfos
     
 def pdfToJson(pdf_path, json_path):
@@ -127,18 +147,21 @@ def pdfToJson(pdf_path, json_path):
         
         #progress info
         totalCourses += len(pageData)
-        print(f"Page {page_num + 1}/{len(pdf_file)}, Courses: {totalCourses}, Courses/Page: {round(totalCourses/(page_num + 1), 2)}")
+        if (page_num + 1)%100 == 0 or  page_num + 1 == len(pdf_file):
+            print(f"Page {page_num + 1}/{len(pdf_file)}, Courses: {totalCourses}, Courses/Page: {round(totalCourses/(page_num + 1), 2)}")
             
-    #put data into json
     print("Dumping to file...")
-    json_file = open(json_path, 'w', encoding="utf-8") #clears if it exists
+    
+    #open json file (clears if it exists)
+    json_file = open(json_path, 'w', encoding="utf-8")
+    
+    #dump data into json
     json.dump(allCourseData, json_file, indent=4, ensure_ascii=False)
     
     #clean up
     pdf_file.close()
     json_file.close()
-    
-        
+  
 
 pdfPath = "Data-Collection/Raw-Data/2024-2025-spring-courses.pdf"
 jsonPath = "Data-Collection/Processed-Data/courses.json"
