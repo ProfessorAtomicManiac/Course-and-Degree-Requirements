@@ -1,14 +1,57 @@
 {
-    "CIV ENGR 890 — PRE-DISSERTATOR'S RESEARCH": "1-9 credits. Under faculty supervision. ",
-    "Requisites:": "",
-    "Course Designation:": "",
-    "Repeatable for Credit:": "",
-    "Last Taught:": "",
-    "Learning Outcomes:": "",
-    "CIV ENGR 909 — GRADUATE SEMINAR - ENVIRONMENTAL CHEMISTRY & TECHNOLOGY": "1 credit. Current research in environmental chemistry and technology. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Fall 2024 1. Demonstrate awareness of historic and/or current advances in environmental chemistry and technology research, practice, policy and/or professional conduct Audience: Graduate ",
-    "CIV ENGR/ATM OCN/BOTANY/ENVIR ST/GEOSCI/ZOOLOGY  911 — LIMNOLOGY AND MARINE SCIENCE SEMINAR": "1 credit. Sections in various fields of zoological research. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Fall 2024 ",
-    "CIV ENGR 919 — SEMINAR-HYDRAULIC ENGINEERING AND FLUID MECHANICS": "1 credit. Current research and review of literature in theoretical and applied fluid mechanics and hydraulic engineering. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Fall 2024 1. Demonstrate awareness of historic and/or current advances in hydraulic engineering and fluid mechanics research, practice, policy and/or professional conduct Audience: Graduate ",
-    "CIV ENGR 929 — SEMINAR-ENVIRONMENTAL ENGINEERING": "1 credit. Current research and literature on water, wastewater, water pollution control, solid wastes engineering and management. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Fall 2024 1. Demonstrate awareness of historic and/or current advances in environmental engineering research, practice, policy and/or professional conduct Audience: Graduate ",
-    "CIV ENGR 939 — GEOTECHNICAL ENGINEERING SEMINAR": "1 credit. Geotechnical analysis, design, and construction. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Spring 2024 1. Demonstrate awareness of historic and/or current advances in geotechnical engineering research, practice, policy and/or professional conduct Audience: Graduate ",
-    "CIV ENGR 949 — SEMINAR-STRUCTURAL ENGINEERING": "1 credit. Structural analysis, design, and construction. Graduate/professional standing Grad 50% - Counts toward 50% graduate coursework requirement Yes, unlimited number of completions Spring 2023 1. Demonstrate awareness of historic and/or current advances in structural engineering research, practice, policy and/or professional conduct Audience: Graduate "
+    "CIV ENGR 890 — PRE-DISSERTATOR'S RESEARCH": {
+        "Info": "1-9 credits. Under faculty supervision. ",
+        "Requisites": "Declared in Civil and Environmental Engineering PHD or Environmental Chemistry and Technology PHD ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Fall 2024 ",
+        "Learning Outcomes": "1. Demonstrate broad knowledge of civil or environmental engineering Audience: Graduate 2. Integrate knowledge from multiple disciplines to independently develop civil or environmental engineering research hypotheses Audience: Graduate 3. Design and conduct preliminary research to iteratively test and finalize hypotheses Audience: Graduate 4. Communicate research results in written and verbal formats Audience: Graduate "
+    },
+    "CIV ENGR 909 — GRADUATE SEMINAR - ENVIRONMENTAL CHEMISTRY & TECHNOLOGY": {
+        "Info": "1 credit. Current research in environmental chemistry and technology. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Fall 2024 ",
+        "Learning Outcomes": "1. Demonstrate awareness of historic and/or current advances in environmental chemistry and technology research, practice, policy and/or professional conduct Audience: Graduate "
+    },
+    "CIV ENGR/ATM OCN/BOTANY/ENVIR ST/GEOSCI/ZOOLOGY  911 — LIMNOLOGY AND MARINE SCIENCE SEMINAR": {
+        "Info": "1 credit. Sections in various fields of zoological research. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Fall 2024 "
+    },
+    "CIV ENGR 919 — SEMINAR-HYDRAULIC ENGINEERING AND FLUID MECHANICS": {
+        "Info": "1 credit. Current research and review of literature in theoretical and applied fluid mechanics and hydraulic engineering. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Fall 2024 ",
+        "Learning Outcomes": "1. Demonstrate awareness of historic and/or current advances in hydraulic engineering and fluid mechanics research, practice, policy and/or professional conduct Audience: Graduate "
+    },
+    "CIV ENGR 929 — SEMINAR-ENVIRONMENTAL ENGINEERING": {
+        "Info": "1 credit. Current research and literature on water, wastewater, water pollution control, solid wastes engineering and management. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Fall 2024 ",
+        "Learning Outcomes": "1. Demonstrate awareness of historic and/or current advances in environmental engineering research, practice, policy and/or professional conduct Audience: Graduate "
+    },
+    "CIV ENGR 939 — GEOTECHNICAL ENGINEERING SEMINAR": {
+        "Info": "1 credit. Geotechnical analysis, design, and construction. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Spring 2024 ",
+        "Learning Outcomes": "1. Demonstrate awareness of historic and/or current advances in geotechnical engineering research, practice, policy and/or professional conduct Audience: Graduate "
+    },
+    "CIV ENGR 949 — SEMINAR-STRUCTURAL ENGINEERING": {
+        "Info": "1 credit. Structural analysis, design, and construction. ",
+        "Requisites": "Graduate/professional standing ",
+        "Course Designation": "Grad 50% - Counts toward 50% graduate coursework requirement ",
+        "Repeatable for Credit": "Yes, unlimited number of completions ",
+        "Last Taught": "Spring 2023 ",
+        "Learning Outcomes": "1. Demonstrate awareness of historic and/or current advances in structural engineering research, practice, policy and/or professional conduct Audience: Graduate "
+    }
 }

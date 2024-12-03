@@ -29,29 +29,22 @@ def getPageData(page):
                     
                     if isBold:
                         started = True
-                        #if the title continues to the next line, add it
-                        # len() > 0 is so there arent errors
-                        if len(courseInfos.keys()) > 0 and courseInfos[list(courseInfos.keys())[-1]] == "":
-                            lastKey = list(courseInfos.keys())[-1]
-                            courseInfos[lastKey + " " + text] = courseInfos.pop(lastKey)
-                        else:
-                            #new section
-                            courseInfos[text] = ""
-                    elif started: 
-                        lastKey = list(courseInfos.keys())[-1]
-                        courseInfos[lastKey] += text + " "
-                    
-                    #add to course_names if it isnt a course info header
-                    # if text not in non_course_names:
                         
-                    #     #if it doesnt have a number, add it to the prev course
-                    #     #this would happen if there was a newline mid course name
-                    #     if not bool(re.search(r'\d', text)):
-                    #         last_key = list(courseInfos.keys())[-1]
-                    #         courseInfos[last_key + " " + text] = courseInfos.pop(last_key)
-                    #     else:
-                    #         courseInfos[text] = {}
-                    # else:
+                        if text in non_course_names:
+                            lastKey = list(courseInfos.keys())[-1]
+                            text = text.replace(":", "")
+                            courseInfos[lastKey][text] = ""
+                        else:
+                            if len(courseInfos.keys()) > 0 and courseInfos[list(courseInfos.keys())[-1]] == {"Info": ""}:
+                                lastKey = list(courseInfos.keys())[-1]
+                                courseInfos[lastKey + " " + text] = courseInfos.pop(lastKey)
+                            else:
+                                #new section
+                                courseInfos[text] = {"Info": ""}
+                    elif started:
+                        lastCourseKey = list(courseInfos.keys())[-1]
+                        lastInfoKey = list(courseInfos[lastCourseKey].keys())[-1]
+                        courseInfos[lastCourseKey][lastInfoKey] += text + " "
     return courseInfos
     
 def pdfToJson(pdf_path, json_path):
