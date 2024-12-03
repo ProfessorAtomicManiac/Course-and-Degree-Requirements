@@ -72,7 +72,7 @@ def getPageData(page):
         splitkey = courseKey.split("—")
         
         #first section is the course code (CIV ENG 909)
-        courseCode = splitkey[0].strip()
+        courseCode = splitkey[0].strip().replace("  ", " ")
         
         #the rest is the name
         courseName = "".join(splitkey[1:]).strip()
@@ -95,13 +95,20 @@ def getPageData(page):
         
         #the course description is the rest
         courseInfos[courseCode]["Description"] = "".join(basicInfo[1:]).strip()
+        
+        #if learning outcomes exists
+        if "Learning Outcomes" in list(courseInfos[courseCode].keys()):
+            #split learning outcomes into a list
+            #split anything with a number-period-space
+            #removes the first one since it always starts with a number-period-space,
+            #so it will have a blank element
+            courseInfos[courseCode]["Learning Outcomes"] = re.split(r'\d+\.\s', courseInfos[courseCode]["Learning Outcomes"])[1:]
             
     return courseInfos
     
 def pdfToJson(pdf_path, json_path):
-    #open pdf and json files
+    #open pdf
     pdf_file = fitz.open(pdf_path)
-    json_file = open(json_path, 'w', encoding="utf-8") #clears if it exists
    
     #initialize dict 
     allCourseData = {}
@@ -124,6 +131,7 @@ def pdfToJson(pdf_path, json_path):
             
     #put data into json
     print("Dumping to file...")
+    json_file = open(json_path, 'w', encoding="utf-8") #clears if it exists
     json.dump(allCourseData, json_file, indent=4, ensure_ascii=False)
     
     #clean up
@@ -135,6 +143,6 @@ def pdfToJson(pdf_path, json_path):
 pdfPath = "Data-Collection/Raw-Data/2024-2025-spring-courses.pdf"
 jsonPath = "Data-Collection/Processed-Data/courses.json"
 
-courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:", "Audience:"]
+courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
 
 pdfToJson(pdfPath, jsonPath)
