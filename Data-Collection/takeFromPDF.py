@@ -55,7 +55,7 @@ def getPageData(page):
                                 #add onto the course name
                                 courseInfos[lastKey + " " + text] = courseInfos.pop(lastKey)
                             else:
-                                #just create a new course section if it isnt empty
+                                #create a new course section if it isnt empty
                                 courseInfos[text] = {"Info": ""}
                     elif started:
                         #get the last course and last info section
@@ -64,6 +64,38 @@ def getPageData(page):
                         
                         #set it to text in between sections that are bold
                         courseInfos[lastCourseKey][lastInfoKey] = (courseInfos[lastCourseKey][lastInfoKey] + " " + text).strip()
+    
+    #post processing:
+    #loop through courses
+    for courseKey in list(courseInfos.keys()):        
+        #split course code and name
+        splitkey = courseKey.split("—")
+        
+        #first section is the course code (CIV ENG 909)
+        courseCode = splitkey[0].strip()
+        
+        #the rest is the name
+        courseName = "".join(splitkey[1:]).strip()
+        
+        #modify key
+        courseInfos[courseCode] = courseInfos.pop(courseKey)
+        
+        #add course name into info
+        courseInfos[courseCode]["Course Name"] = courseName
+        
+        #get the info that is under the course name
+        basicInfo = courseInfos[courseCode]["Info"].split(".")
+        
+        #not needed anymore
+        del courseInfos[courseCode]["Info"]
+        
+        #credits are the first part of the basic info
+        #the number of credits are the first part of that
+        courseInfos[courseCode]["Credits"] = basicInfo[0].split(" ")[0]
+        
+        #the course description is the rest
+        courseInfos[courseCode]["Description"] = "".join(basicInfo[1:]).strip()
+            
     return courseInfos
     
 def pdfToJson(pdf_path, json_path):
@@ -89,7 +121,7 @@ def pdfToJson(pdf_path, json_path):
         #progress info
         totalCourses += len(pageData)
         print(f"Page {page_num + 1}/{len(pdf_file)}, Courses: {totalCourses}, Courses/Page: {round(totalCourses/(page_num + 1), 2)}")
-        
+            
     #put data into json
     print("Dumping to file...")
     json.dump(allCourseData, json_file, indent=4, ensure_ascii=False)
@@ -103,6 +135,6 @@ def pdfToJson(pdf_path, json_path):
 pdfPath = "Data-Collection/Raw-Data/2024-2025-spring-courses.pdf"
 jsonPath = "Data-Collection/Processed-Data/courses.json"
 
-courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
+courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:", "Audience:"]
 
 pdfToJson(pdfPath, jsonPath)
