@@ -15,11 +15,7 @@
                 "Sophomore status"
             ]
         ],
-        "Prohibited":[
-            51,
-            98,
-            "Goofy"
-        ]
+        "Prohibited": "a string that the user has to look through (:"
     }
 ]
 
