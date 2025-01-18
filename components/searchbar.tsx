@@ -1,15 +1,34 @@
 "use client"
 
-import { useState } from "react";
+import { getCourse } from "@/lib/service";
+import { useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-export default function SearchBar() {
+export default function SearchBar({onSearch}: {onSearch: (course: string) => void}) {
     const [input, setInput] = useState("");
+    const [isFocused, setIsFocused] = useState(false);
 
-    return <div className="absolute z-10 w-1/3 m-4 p-2 rounded-full shadow-md flex bg-slate-50">
-        <input onChange={(event) => setInput(event.target.value)} className="border-none bg-slate-50 flex-1"/>
-        <button type="button">
-            <FaSearch size="20" className="w-min"/>
+    return <div className="z-50 w-fit p-2 m-4 rounded-full bg-slate-50 shadow-md flex items-center">
+        <input
+            type="text"
+            placeholder="Enter course here" 
+            onChange={(event) => {
+                setIsFocused(false);
+                setInput(event.target.value);
+            }} 
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className={`border-none m-2 bg-slate-50 flex-1 ${isFocused ? "outline" : "outline-none"}`}
+        />
+        <button 
+            type="button" 
+            className="mr-1 p-2 h-fit rounded-full aspect-square hover:bg-slate-200"
+            onClick={() => {
+                console.log(input);
+               onSearch(input);
+            }}
+        >
+            <FaSearch size="15" className="w-min"/>
         </button>
     </div>
 }
