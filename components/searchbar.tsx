@@ -7,8 +7,7 @@ import { FaSearch } from "react-icons/fa";
 export default function SearchBar({onSearch}: {onSearch: (course: string) => void}) {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
-
-    return <div className="z-50 w-fit p-2 m-4 rounded-full bg-slate-50 shadow-md flex items-center">
+    return <div className="w-11/12 p-2 my-4 mx-auto rounded-full bg-slate-50 shadow-md flex items-center">
         <input
             type="text"
             placeholder="Enter course here" 

@@ -30,7 +30,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>CDR</title>
       </head>
-      <body className="flex">
+      <body className="m-0 p-0 flex">
         <NavBar />
         {children}
       </body>

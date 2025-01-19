@@ -8,6 +8,7 @@ import SearchBar from '@/components/searchbar';
 import { getCourse } from '@/lib/service';
 import CourseNode from '@/components/courseNode';
 import SearchExpand from '@/components/searchExpand';
+import SearchComponent from '@/components/searchComp';
 
 
 const initialNodes = [
@@ -16,15 +17,7 @@ const initialNodes = [
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
-const testCourse = {
-  id: 0,
-  courseCode: "NUT 9000",
-  courseName: "Nutritional Science Graduate Studies",
-  desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quo eligendi saepe asperiores quaerat debitis at vitae optio numquam impedit, iure rem harum, quidem similique obcaecati labore! Nisi, voluptas quo?",
-  credits: 69,
-  requisites: ["NUT 100"],
-  prohibited: []
-}
+
 
 export default function App() {
   const [nodes, setNodes] = useState<Node[]>([]);
@@ -54,11 +47,11 @@ export default function App() {
       <div className="absolute w-full h-full ">
         <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges}>
           <Background />
-          <Panel className="w-1/3 p-0 m-0">
-            <SearchBar onSearch={handleSearch}/>
-          </Panel>
         </ReactFlow>
+
       </div>
+      <SearchComponent onSearch={handleSearch}/>
+
     </div>
   );
 }

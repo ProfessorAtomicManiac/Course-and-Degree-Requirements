@@ -9,7 +9,7 @@ function IconButton({icon, label}: {icon: ReactNode, label: string}) {
 }
 
 export default function NavBar() {
-    return <nav className="sticky top-0 left-0 h-screen w-16 m-0 shadow-lg bg-slate-50 flex flex-col items-center">
+    return <nav className="z-50 sticky top-0 left-0 h-screen w-16 m-0 border-r shadow-lg bg-background flex flex-col items-center">
         <IconButton icon={<MdOutlineFileUpload size="25"/>} label="DARS"/>
         <IconButton icon={<MdHistory size="25"/>} label="Recents"/>
     </nav>
