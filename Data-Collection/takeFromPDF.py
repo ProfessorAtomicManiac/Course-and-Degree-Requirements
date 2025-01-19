@@ -2,18 +2,8 @@ import fitz  # pip install PyMuPDF
 import re
 import json
 
-def formatRequisites(requisiteString):
-    #split by or
-    requisiteList = requisiteString.split(" or ")
-    #split by and
-    requisiteList = [requisite.split(" and ") for requisite in requisiteList]
-
-    #clean up
-    for requisiteListOr_index in range(len(requisiteList)):
-        requisiteList[requisiteListOr_index] = [requisite.strip() for requisite in requisiteList[requisiteListOr_index]]
-        
-    return requisiteList
-
+from ParseRequisites import *
+ 
 def getPageData(page):
     blocks = page.get_text("dict")["blocks"]
     
@@ -109,16 +99,27 @@ def getPageData(page):
         courseInfos[courseCode]["Description"] = "".join(basicInfo[1:]).strip()
         
         #if learning outcomes exists
-        if "Learning Outcomes" in list(courseInfos[courseCode].keys()):
+        #if "Learning Outcomes" in list(courseInfos[courseCode].keys()):
             #split learning outcomes into a list
             #split anything with a number-period-space
             #removes the first one since it always starts with a number-period-space,
             #so it will have a blank element
-            courseInfos[courseCode]["Learning Outcomes"] = re.split(r'\d+\.\s', courseInfos[courseCode]["Learning Outcomes"])[1:]
+        #    courseInfos[courseCode]["Learning Outcomes"] = re.split(r'\d+\.\s', courseInfos[courseCode]["Learning Outcomes"])[1:]
         
         if "Requisites" in list(courseInfos[courseCode].keys()):
-            courseInfos[courseCode]["RequisiteString"] = courseInfos[courseCode]["Requisites"]
-            courseInfos[courseCode]["Requisites"] = formatRequisites(courseInfos[courseCode]["Requisites"])
+            requisiteString = courseInfos[courseCode]["Requisites"]
+
+            courseInfos[courseCode]["RequisiteString"] = requisiteString
+            
+            try:
+                requisites, prohibited = parseRequisites(requisiteString)
+                courseInfos[courseCode]["Requisites"] = requisites
+                courseInfos[courseCode]["Prohibited"] = prohibited
+            except Exception as e:
+                with open(errorPath, 'a') as errorFile:
+                    errorFile.writelines(f"\nCouldnt parse requisite string: {requisiteString}\nError: {e}\n")
+                courseInfos[courseCode]["Requisites"] = "Couldn't Parse"
+                courseInfos[courseCode]["Prohibited"] = "Couldn't Parse"
         else:
             #if it doesnt have requirements, it isnt a course
             #really only for like 2 weird cases at the start of the pdf
@@ -165,7 +166,8 @@ def pdfToJson(pdf_path, json_path):
 
 pdfPath = "Data-Collection/Raw-Data/2024-2025-spring-courses.pdf"
 jsonPath = "Data-Collection/Processed-Data/courses.json"
+errorPath = "Data-Collection/Processed-Data/errors.txt"
 
-courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
+courseInfoSections = ["Requisites:"]#, "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
 
 pdfToJson(pdfPath, jsonPath)

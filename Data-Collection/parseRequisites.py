@@ -6,9 +6,11 @@ testRequisites = [
 	#"Nursing BSN (Traditional, Accelerated or Collaborative), senior standing and declared in Health Promotion and Health Equity BS, or graduate/professional standing",
 	#"(ACCT I S 340 or concurrent enrollment), (ACCT I S 100 and GEN BUS 307 or 317), (ACCT I S 700 or concurrent enrollment), or declared in the Business Exchange program",
 	#"(CHEM 103, 109, or 115) and (MATH 112, 114, 171 or placement into MATH 221), or graduate/professional standing"
+	#"MATH 96 or placement into MATH 112 or satisfied Quantitative Reasoning (QR) A requirement. Not open to students with credit for ECON 101, 102, or 111"
+
+	"ZOOLOGY/BIOLOGY  101 and 102, ZOOLOGY/BIOLOGY/ BOTANY  152, (BIOCORE 381 and 382), or graduate/professional standing Breadth - Biological Sci. Counts toward the Natural Sci req Level - Intermediate L&S Credit - Counts as Liberal Arts and Science credit in L&S Grad 50% - Counts toward 50% graduate coursework requirement No Spring 2024"
 	
 	#work:
-	#"MATH 96 or placement into MATH 112 or satisfied Quantitative Reasoning (QR) A requirement. Not open to students with credit for ECON 101, 102, or 111"
 	#"Not open to students declared in the Nursing, Physician Assistant, or Doctor of Pharmacy programs",
 	#"PHM PRAC 554, 556 and PHMCOL-M/PHM SCI  522",
 	#"PHM PRAC 550, 555, 556, and 655",
@@ -17,15 +19,13 @@ testRequisites = [
 	#"Declared in MS Pharmaceutical Sciences: Psychoactive Pharmaceutical Investigation or Capstone Certificate in Psychoactive Pharmaceutical Investigation",
 	#"PHM PRAC 655 or (NURSING 312 and NURSING 422)",
 ]
+
 """
 things that don't work:
 when there is an operator right after () in a list
 current enrolment
 lists where they arent classes (just need to figure out how to get rid of them)
 """
-
-
-operators = [" or ", " and ", "("]
 
 def getFirstOperator(requisiteString, operators):
 	firstOperator = None
@@ -142,6 +142,7 @@ def splitByOperators(requisites, operators):
 		for requisite in requisitesSplit:
 			if requisite not in operators:
 				
+				print(requisite)
 				nextLayer = splitByOperators(requisite, operators)
 				
 				#get rid of layers that have only one element
@@ -171,7 +172,7 @@ def seperateProhibited(requisites):
 		return None, None
 		
 
-def parseRequisites(requisiteString, operators):
+def parseRequisites(requisiteString, operators = [" or ", " and ", "("]):
 	#seperate prohibited
 	requisiteString, prohibited = seperateProhibited(requisiteString)
 	
@@ -181,13 +182,14 @@ def parseRequisites(requisiteString, operators):
 	
 	requisites = splitByOperators(requisiteString, operators)
 	
-	print("After seperating by operators: " + str(requisites) + "\n")
+	#print("After seperating by operators: " + str(requisites) + "\n")
 	requisites = splitByCommas(requisites)
 	
 	return requisites, prohibited
 
-for requisiteString in testRequisites:
-	print(f"\nStart: {requisiteString}\n")
-	requisites, prohibited = parseRequisites(requisiteString, operators)
-	print(f"Requisites: {requisites}")
-	print(f"Prohibited: {prohibited}")
+if __name__ == "__main__":
+	for requisiteString in testRequisites:
+		print(f"\nStart: {requisiteString}\n")
+		requisites, prohibited = parseRequisites(requisiteString)
+		print(f"Requisites: {requisites}")
+		print(f"Prohibited: {prohibited}")
