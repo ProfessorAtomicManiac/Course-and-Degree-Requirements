@@ -1,6 +1,6 @@
 import { Handle, Position } from "@xyflow/react"
 import { useState } from "react"
-import Course from './course.ts'
+import Course from '../../types/course.ts'
 
 export default function CourseNode({ data }: { data: Course }) {
 
