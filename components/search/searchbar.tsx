@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaRegTimesCircle, FaSearch } from "react-icons/fa";
 import { NodesContext } from "../courseMap/nodesContext";
 import { NUT9000 } from "@/types/course";
 import { SearchContext } from "./searchContext";
@@ -19,6 +19,11 @@ export default function SearchBar() {
             addNode(NUT9000);
             setSearchedCourse(NUT9000);
         }
+    }
+
+    function handleClear() {
+        setInput("");
+        setSearchedCourse(null);
     }
 
     // i feel like there is a better way to do this
@@ -39,14 +44,25 @@ export default function SearchBar() {
                 onBlur={() => setIsFocused(false)}
                 className={`border-none m-2 bg-slate-50 flex-1 ${isFocused ? "outline" : "outline-none"}`}
             />
-        <button 
-            type="button" 
-            className="mr-1 p-2 h-fit rounded-full aspect-square hover:bg-slate-200"
-            onClick={(_) => {
-                handleSearch(input);
-            }}
-        >
-            <FaSearch size="15" className="w-min"/>
-        </button>
+        <div className="flex">
+            {input.length > 0 && <button
+                type="button"
+                className="p-2 h-fit rounded-full aspect-square hover:bg-slate-200"
+                onClick={(_) => {
+                    handleClear();
+                }}
+            >
+                <FaRegTimesCircle size="15" className="w-min" />
+            </button>}
+            <button
+                type="button"
+                className="mr-1 p-2 h-fit rounded-full aspect-square hover:bg-slate-200"
+                onClick={(_) => {
+                    handleSearch(input);
+                }}
+            >
+                <FaSearch size="15" className="w-min"/>
+            </button>
+        </div>
     </div>
 }
