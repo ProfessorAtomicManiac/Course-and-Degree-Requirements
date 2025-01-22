@@ -26,10 +26,12 @@ export default function SearchBar() {
         }
     }
 
+    // i feel like there is a better way to do this
     useEffect(() => {
         console.log("Bruh");
         setInput(searchedCourse === null ? "" : searchedCourse.courseCode);
     }, [searchedCourse])
+
     console.log(searchedCourse?.courseCode);
     return <div className="w-11/12 p-2 my-4 mx-auto rounded-full bg-slate-50 shadow-md flex items-center">
         <input
