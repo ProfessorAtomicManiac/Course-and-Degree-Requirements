@@ -1,7 +1,7 @@
 import { Background, ReactFlow } from "@xyflow/react";
 import { useContext, useMemo } from "react";
 import CourseNode from "./courseNode";
-import { NodesContext, NodesContextType } from "@/components/courseMap/nodesContext";
+import { NodesContext } from "@/components/courseMap/nodesContext";
 
 export default function CourseMap() {
     const nodeTypes = useMemo(() => ({ courseNode: CourseNode}), []);

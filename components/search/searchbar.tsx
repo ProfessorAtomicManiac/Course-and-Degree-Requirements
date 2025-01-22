@@ -1,20 +1,15 @@
 "use client"
 
-import { getCourse } from "@/lib/service";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { NodesContext } from "../courseMap/nodesContext";
-import Course, { NUT9000 } from "@/types/course";
+import { NUT9000 } from "@/types/course";
 import { SearchContext } from "./searchContext";
-
-
-
 
 export default function SearchBar() {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
-    // remove the nodes id thingy, its for testing
-    const {nodes, addNode} = useContext(NodesContext);
+    const {addNode} = useContext(NodesContext);
     const {searchedCourse, setSearchedCourse} = useContext(SearchContext);
       
     function handleSearch(input: string) {

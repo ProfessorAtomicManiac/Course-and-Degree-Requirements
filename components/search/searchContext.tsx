@@ -1,4 +1,4 @@
-import { createContext, ReactNode, SetStateAction, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import Course from "../../types/course";
 
 interface CourseUID extends Course {
