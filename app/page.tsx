@@ -17,12 +17,13 @@ export default function App() {
   
   return (
       <NodesContextProvider>
+        <CourseContextProvider>
         <div className="relative w-full">
           <CourseMap />
-          <CourseContextProvider>
+          
             <SearchComponent />
-          </CourseContextProvider>
         </div>
+        </CourseContextProvider>
       </NodesContextProvider>
     
   );
