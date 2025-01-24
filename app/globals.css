@@ -19,3 +19,21 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+button {
+  --width: 1rem;
+  --button-right-shift: calc(100% + var(--width));
+}
+
+.animate-slide {
+  animation: 1s linear slide;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
