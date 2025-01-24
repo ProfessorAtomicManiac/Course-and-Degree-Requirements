@@ -11,7 +11,7 @@ export default function SearchComponent() {
     const [slide, setSlide] = useState("");
     const [expanded, setExpanded] = useState(false);
 
-    // i think it re-renders every time searchedCourse is changed
+    // i swear there's gotta be a better way to do this
     useEffect(() => {
       setExpanded(searchedCourse !== null);
       setSlide("");
