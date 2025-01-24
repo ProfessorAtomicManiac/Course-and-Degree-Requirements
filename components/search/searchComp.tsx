@@ -17,8 +17,6 @@ export default function SearchComponent() {
       setSlide("");
     }, [searchedCourse])
   
-    console.log("Slide: ", slide);
-    console.log("Expanded: ", expanded);
     return searchedCourse !== null ? 
           <section 
             className={`${slide} box-content absolute w-1/3 h-screen bg-background border-r shadow-lg flex flex-col`}
