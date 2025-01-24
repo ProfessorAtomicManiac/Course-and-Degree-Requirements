@@ -31,7 +31,7 @@ export default function SearchBar() {
         setInput(searchedCourse === null ? "" : searchedCourse.courseCode);
     }, [searchedCourse])
 
-    return <div className="animation-none w-11/12 p-2 my-4 mx-auto rounded-full bg-slate-50 shadow-md flex items-center">
+    return <div className="w-11/12 p-2 my-4 mx-auto rounded-full bg-slate-50 shadow-md flex items-center">
         <input
                 type="text"
                 placeholder="Enter course here" 
