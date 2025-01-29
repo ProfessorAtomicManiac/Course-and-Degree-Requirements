@@ -7,7 +7,7 @@ export default function SearchBar() {
     const [input, setInput] = useState("");
 
     return <div className="absolute z-10 w-1/3 m-4 p-2 rounded-full shadow-md flex bg-slate-50">
-        <input onChange={(event) => setInput(event.target.value)} className="border-none bg-slate-50 flex-1"/>
+        <input onChange={(event) => setInput(event.target.value)} className="border-none bg-slate-50 flex-1" aria-label={input}/>
         <button type="button">
             <FaSearch size="20" className="w-min"/>
         </button>
