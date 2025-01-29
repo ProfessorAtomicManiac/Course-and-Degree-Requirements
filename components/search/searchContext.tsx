@@ -12,7 +12,7 @@ interface SearchContextType {
 
 export const SearchContext = createContext<SearchContextType>({
     searchedCourse: null,
-    setSearchedCourse: (c: Course | null) => {}
+    setSearchedCourse: (_: Course | null) => {}
 });
 
 export default function CourseContextProvider({children}: {children: ReactNode}) {

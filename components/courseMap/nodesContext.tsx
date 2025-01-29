@@ -12,7 +12,7 @@ export interface NodesContextType {
 export const NodesContext = createContext<NodesContextType>({
     nodes: [],
     edges: [],
-    addNode: (c: Course) => {},
+    addNode: (_: Course) => {},
     addEdge: () => {}
 });
 
@@ -26,7 +26,7 @@ const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 export default function NodesContextProvider({children}: {children: ReactNode}) {
     const [nodes, setNodes] = useState<Node[]>([]);
-    const [edges, setEdges] = useState<Edge[]>([]);
+    const [edges, _] = useState<Edge[]>([]);
 
     function addNode(course: Course) {
         const newNode = {

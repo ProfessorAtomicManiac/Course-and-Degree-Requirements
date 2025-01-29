@@ -5,7 +5,7 @@ import { SearchContext } from "../search/searchContext.tsx";
 
 export default function CourseNode({ data }: { data: Course }) {
 
-    const [hasTaken, setHasTaken] = useState(false);
+    const [hasTaken, _] = useState(false);
     const {setSearchedCourse} = useContext(SearchContext);
     function handleClick() {
         setSearchedCourse(NUT9000);
