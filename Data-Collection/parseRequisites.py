@@ -8,12 +8,12 @@ testRequisites = [
 	#"(CHEM 103, 109, or 115) and (MATH 112, 114, 171 or placement into MATH 221), or graduate/professional standing"
 	#"MATH 96 or placement into MATH 112 or satisfied Quantitative Reasoning (QR) A requirement. Not open to students with credit for ECON 101, 102, or 111"
 
-	"ZOOLOGY/BIOLOGY  101 and 102, ZOOLOGY/BIOLOGY/ BOTANY  152, (BIOCORE 381 and 382), or graduate/professional standing Breadth - Biological Sci. Counts toward the Natural Sci req Level - Intermediate L&S Credit - Counts as Liberal Arts and Science credit in L&S Grad 50% - Counts toward 50% graduate coursework requirement No Spring 2024"
+	#"ZOOLOGY/BIOLOGY  101 and 102, ZOOLOGY/BIOLOGY/ BOTANY  152, (BIOCORE 381 and 382), or graduate/professional standing Breadth - Biological Sci. Counts toward the Natural Sci req Level - Intermediate L&S Credit - Counts as Liberal Arts and Science credit in L&S Grad 50% - Counts toward 50% graduate coursework requirement No Spring 2024"
 	
 	#work:
 	#"Not open to students declared in the Nursing, Physician Assistant, or Doctor of Pharmacy programs",
 	#"PHM PRAC 554, 556 and PHMCOL-M/PHM SCI  522",
-	#"PHM PRAC 550, 555, 556, and 655",
+	"PHM PRAC 550, 555, 556, and 655",
 	#"PHM PRAC 653, 655 and PHM SCI 623",
 	#"Declared in Doctor of Pharmacy program with second year standing",
 	#"Declared in MS Pharmaceutical Sciences: Psychoactive Pharmaceutical Investigation or Capstone Certificate in Psychoactive Pharmaceutical Investigation",
@@ -57,11 +57,10 @@ def findNumberIndex(string):
 		return match.start()
 	return -1  # Return -1 if no number is found
 
-#takes string such as "COMP SCI 100, 200, and 300" and converts to 
+#takes string such as "COMP SCI 100, 200, and 300" and converts to list
 def combinedCoursesToList(combinedCourse):
 	#not a list
-	if combinedCourse.find(",") == -1:
-		print(combinedCourse)
+	if combinedCourse.find(",") == -1:# or findNumberIndex(combinedCourse) == -1:
 		return combinedCourse
 	
 	finalCourseList = []
@@ -142,7 +141,7 @@ def splitByOperators(requisites, operators):
 		for requisite in requisitesSplit:
 			if requisite not in operators:
 				
-				print(requisite)
+				#print(requisite)
 				nextLayer = splitByOperators(requisite, operators)
 				
 				#get rid of layers that have only one element

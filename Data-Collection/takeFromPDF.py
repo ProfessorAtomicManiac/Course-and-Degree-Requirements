@@ -1,6 +1,6 @@
 import fitz  # pip install PyMuPDF
-import re
 import json
+import os
 
 from ParseRequisites import *
  
@@ -118,6 +118,9 @@ def getPageData(page):
             except Exception as e:
                 with open(errorPath, 'a') as errorFile:
                     errorFile.writelines(f"\nCouldnt parse requisite string: {requisiteString}\nError: {e}\n")
+                    #print(f"\nRequisite string: {requisiteString}\n\nError: {e}\n")
+                    #print(f"\n\nCourse stuff: {courseInfos}\n")
+                #exit()
                 courseInfos[courseCode]["Requisites"] = "Couldn't Parse"
                 courseInfos[courseCode]["Prohibited"] = "Couldn't Parse"
         else:
@@ -130,6 +133,8 @@ def getPageData(page):
 def pdfToJson(pdf_path, json_path):
     #open pdf
     pdf_file = fitz.open(pdf_path)
+    if os.path.exists(errorPath):
+        os.remove(errorPath)
    
     #initialize dict 
     allCourseData = {}
