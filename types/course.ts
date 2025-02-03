@@ -1,4 +1,5 @@
 import { type Node } from '@xyflow/react';
+import { type } from 'node:os';
 
 export type Course = {
     id: number,
@@ -9,6 +10,18 @@ export type Course = {
     requisitesId: number[],
     requisites: string[],
     prohibited: string
+};
+
+export type CourseNode = Node<Course, 'courseNode'>;
+export function CourseNode(id: string, position: {x: number, y: number}, data: Course): CourseNode {
+    return {
+        id: id,
+        position: {
+            x: position.x,
+            y: position.y
+        },
+        data: data
+    }
 }
 
 export const NUT9000: Course = {  
