@@ -5,7 +5,7 @@ export default interface Course {
     desc: string,
     credits: number,
     requisites: string[],
-    prohibited: string[]
+    prohibited: string
 }
 
 export const NUT9000: Course = {  
@@ -15,5 +15,5 @@ export const NUT9000: Course = {
             desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum consequuntur maiores reiciendis est enim natus ut iusto nulla, earum recusandae labore pariatur facere quaerat sint ea ullam cum, magni ratione!",
             credits: 69,
             requisites: [],
-            prohibited: []
+            prohibited: ""
           }
