@@ -5,14 +5,14 @@ import { Edge, type Node } from '@xyflow/react';
 export interface NodesContextType {
     nodes: Node[], 
     edges: Edge[],
-    addNode: (c: Course) => void,
+    addCourse: (c: Course) => void,
     addEdge: () => void
 }
 
 export const NodesContext = createContext<NodesContextType>({
     nodes: [],
     edges: [],
-    addNode: (_: Course) => {},
+    addCourse: (_: Course) => {},
     addEdge: () => {}
 });
 
@@ -23,26 +23,56 @@ const initialNodes = [
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 */
+const width = 128; // px
+const height = 32; // px
 
 export default function NodesContextProvider({children}: {children: ReactNode}) {
-    const [nodes, setNodes] = useState<Node[]>([]);
+    const [nodes, setNodes] = useState<CourseNode[]>([]);
     const [edges, _] = useState<Edge[]>([]);
 
-    function addNode(course: Course) {
-        const newNode = {
-          id: nodes.length.toString(),
-          type: 'courseNode',
-          position: { x: 0, y: 100 * nodes.length},
-          data: {...course}
+    const ELK = require('elkjs')
+    const elk = new ELK()
+  
+    const graph = {
+      id: "root",
+      layoutOptions: { 'elk.algorithm': 'layered' },
+      children: nodes.map((node) => {
+        return {
+          id: node.id,
+          width: width,
+          height: height
         }
+      }),
+      edges: nodes.map((node) => {
+        return {
+          ...[(node.data).requisitesId.map((requisiteId) => {
+            return {
+              id: `${node.data.id}-${requisiteId}`,
+              sources: [node.data.id],
+              targets: [requisiteId]
+            }
+          })]
+        }
+      })
+    }
+    
+    async function loadLayout() {
+      const bruh = await elk.layout(graph)
+       .then(console.log)
+       .catch(console.error)
+    }
+
+    function addCourse(course: Course) {
+        const newNode = CourseNode(nodes.length.toString(), {x: 0, y: 0}, course);
         setNodes((nds) => [...nds, newNode]);
+        loadLayout();
       }
 
     function addEdge() {
         console.log("Adding Edges not implemented");
     }
 
-    return <NodesContext.Provider value={{nodes, edges, addNode, addEdge}} >
+    return <NodesContext.Provider value={{nodes, edges, addCourse: addCourse, addEdge}} >
         {children}
     </NodesContext.Provider>
 }
