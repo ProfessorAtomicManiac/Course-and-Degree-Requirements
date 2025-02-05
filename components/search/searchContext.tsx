@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { Course } from "../../types/course";
+import { Course } from '../courseMap/courseNode';
 
 interface CourseUID extends Course {
     uid: number

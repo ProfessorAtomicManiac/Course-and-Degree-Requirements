@@ -1,27 +1,4 @@
-import { type Node } from '@xyflow/react';
-import { type } from 'node:os';
-
-export type Course = {
-    id: string,
-    courseCode: string,
-    courseName: string,
-    desc: string,
-    credits: number,
-    requisites: string[],
-    prohibited: string
-};
-
-export type CourseNode = Node<Course, 'courseNode'>;
-export function CourseNode(id: string, position: {x: number, y: number}, data: Course): CourseNode {
-    return {
-        id: id,
-        position: {
-            x: position.x,
-            y: position.y
-        },
-        data: data
-    }
-}
+import { Course } from '@/components/courseMap/courseNode';
 
 export const CS200: Course = {  
     id: "CS200",      
@@ -52,18 +29,3 @@ export const CS400: Course = {
     requisites: ["CS300"],
     prohibited: ""
 }
-
-/* example node
-{
-    id: 'a',
-    data: {
-        label: 'A',
-        // we need unique ids for the handles (called 'ports' in elkjs) for the layouting
-        // an id is structured like: nodeid-source/target-id
-        sourceHandles: [{ id: 'a-s-a' }, { id: 'a-s-b' }, { id: 'a-s-c' }],
-        targetHandles: [],
-    },
-    position: { x: 0, y: 0 },
-    type: 'elk',
-}
-*/

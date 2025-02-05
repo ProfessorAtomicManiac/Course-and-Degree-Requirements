@@ -1,4 +1,4 @@
-import { Course } from '../../types/course.ts'
+import { Course } from '../courseMap/courseNode.tsx'
 
 export default function SearchExpand({course}: {course: Course}) {
     return <section className="w-full h-screen m-0 p-2 flex flex-col gap-4">

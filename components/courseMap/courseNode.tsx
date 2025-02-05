@@ -1,7 +1,29 @@
-import { Handle, Position } from "@xyflow/react"
+import { Handle, Position, type Node } from "@xyflow/react"
 import { useContext, useState } from "react"
-import { Course, NUT9000 } from '../../types/course.ts'
+import { CS200, CS300, CS400 } from '../../types/course.ts'
 import { SearchContext } from "../search/searchContext.tsx";
+
+export type Course = {
+    id: string;
+    courseCode: string;
+    courseName: string;
+    desc: string;
+    credits: number;
+    requisites: string[];
+    prohibited: string;
+};
+export type CourseNodeParams = Node<Course, 'courseNode'>;
+export function CourseNodeParams(id: string, position: {x: number, y: number}, data: Course): CourseNodeParams {
+    return {
+        id: id,
+        type: 'courseNode',
+        position: {
+            x: position.x,
+            y: position.y
+        },
+        data: data
+    }
+}
 
 // implement NodeProps<CourseNode> to handle "handles", "edges", "labels", etc
 export default function CourseNode({ data }: { data: Course }) {
@@ -9,7 +31,7 @@ export default function CourseNode({ data }: { data: Course }) {
     const [hasTaken, _] = useState(false);
     const {setSearchedCourse} = useContext(SearchContext);
     function handleClick() {
-        setSearchedCourse(NUT9000);
+        // setSearchedCourse(NUT9000);
         //setHasTaken(!hasTaken);
     }
 
