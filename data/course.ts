@@ -99,4 +99,4 @@ const CS577: Course = {
     prohibited: ""
 }
 
-export const testCourses = [CS200, CS300, CS400, CS252, CS354, MATH221, MATH222, CS240, CS577];
+export const testCourses = [CS200, CS300, CS400, CS252, CS354, MATH221, MATH222, CS240, CS537, CS577];
