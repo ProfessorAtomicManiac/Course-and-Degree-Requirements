@@ -1,6 +1,6 @@
 import { Handle, Position } from "@xyflow/react"
 import { useContext, useState } from "react"
-import Course, { NUT9000 } from '../../types/course.ts'
+import { Course, NUT9000 } from '../../types/course.ts'
 import { SearchContext } from "../search/searchContext.tsx";
 
 // implement NodeProps<CourseNode> to handle "handles", "edges", "labels", etc
