@@ -3,21 +3,21 @@
 import { useContext, useEffect, useState } from "react";
 import { FaRegTimesCircle, FaSearch } from "react-icons/fa";
 import { NodesContext } from "../courseMap/nodesContext";
-import { NUT9000 } from "@/types/course";
+import { testCourses } from "@/data/course";
 import { SearchContext } from "./searchContext";
 
 export default function SearchBar() {
     const [input, setInput] = useState("");
     const [isFocused, setIsFocused] = useState(false);
-    const {addNode} = useContext(NodesContext);
+    const {addCourse: addNode} = useContext(NodesContext);
     const {searchedCourse, setSearchedCourse} = useContext(SearchContext);
       
     function handleSearch(input: string) {
         if (input.length === 0) {
             setSearchedCourse(null);
         } else {
-            addNode(NUT9000);
-            setSearchedCourse(NUT9000);
+            // addNode(NUT9000);
+            // setSearchedCourse(NUT9000);
         }
     }
 
