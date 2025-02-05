@@ -1,30 +1,43 @@
 import re
 
 testRequisites = [
-	#don't work:
 	#"PHM PRAC 656 or concurrent enrollment",
 	#"Nursing BSN (Traditional, Accelerated or Collaborative), senior standing and declared in Health Promotion and Health Equity BS, or graduate/professional standing",
 	#"(ACCT I S 340 or concurrent enrollment), (ACCT I S 100 and GEN BUS 307 or 317), (ACCT I S 700 or concurrent enrollment), or declared in the Business Exchange program",
 	#"(CHEM 103, 109, or 115) and (MATH 112, 114, 171 or placement into MATH 221), or graduate/professional standing"
 	#"MATH 96 or placement into MATH 112 or satisfied Quantitative Reasoning (QR) A requirement. Not open to students with credit for ECON 101, 102, or 111"
-
-	#"ZOOLOGY/BIOLOGY  101 and 102, ZOOLOGY/BIOLOGY/ BOTANY  152, (BIOCORE 381 and 382), or graduate/professional standing Breadth - Biological Sci. Counts toward the Natural Sci req Level - Intermediate L&S Credit - Counts as Liberal Arts and Science credit in L&S Grad 50% - Counts toward 50% graduate coursework requirement No Spring 2024"
-	
-	#work:
+	#"(ECON 101, 102, 111 or concurrent enrollment) and (MATH 211, 217, or 221)"
 	#"Not open to students declared in the Nursing, Physician Assistant, or Doctor of Pharmacy programs",
 	#"PHM PRAC 554, 556 and PHMCOL-M/PHM SCI  522",
-	"PHM PRAC 550, 555, 556, and 655",
+	"ZOOLOGY/BIOLOGY  101 and 102, ZOOLOGY/BIOLOGY/ BOTANY  152, (BIOCORE 381 and 382), or graduate/professional standing",
+	#"PHM PRAC 550, 555, 556, and 655",
 	#"PHM PRAC 653, 655 and PHM SCI 623",
 	#"Declared in Doctor of Pharmacy program with second year standing",
 	#"Declared in MS Pharmaceutical Sciences: Psychoactive Pharmaceutical Investigation or Capstone Certificate in Psychoactive Pharmaceutical Investigation",
 	#"PHM PRAC 655 or (NURSING 312 and NURSING 422)",
 ]
 
+#all of the strings that aren't classes in the 
+requisiteStrings = ["graduate/professional standing", "satisfied Quantitative Reasoning (QR) A requirement", "senior standing", "declared in Health Promotion and Health Equity BS", "Declared in Doctor of Pharmacy program with second year standing", "declared in the Business Exchange program"]
+
+#convert to lowercase
+for requisiteStringIndex in range(len(requisiteStrings)):
+	requisiteStrings[requisiteStringIndex] = requisiteStrings[requisiteStringIndex].lower()
+
 """
-things that don't work:
-when there is an operator right after () in a list
-current enrolment
-lists where they arent classes (just need to figure out how to get rid of them)
+steps to parse:
+delete "placement into" (add flag)
+delete "concurrent enrollment (add flag)
+make everything lowercase
+replace requisite strings with indexes
+replace double spaces and weird spaces with 1 space
+split by parenthesis
+	remove comma if after close parenthesis
+split by commas
+	"and" or "or" based on operater after last comma
+	if lone numbers left
+		take course degree from the one before
+anything after "Not open to" is a "prohibited"
 """
 
 def getFirstOperator(requisiteString, operators):
@@ -139,13 +152,16 @@ def splitByOperators(requisites, operators):
 		
 		#go to next layer
 		for requisite in requisitesSplit:
+			
+			#if it isnt an operator
 			if requisite not in operators:
 				
-				#print(requisite)
+				#print(requisite + "\n")
 				nextLayer = splitByOperators(requisite, operators)
+				#print(str(nextLayer) + "\n")
 				
-				#get rid of layers that have only one element
 				if len(nextLayer) == 1:
+					#move layers that only have one element down
 					requisiteList.extend(nextLayer)
 				else:
 					requisiteList.append(nextLayer)

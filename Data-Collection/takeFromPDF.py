@@ -173,6 +173,6 @@ jsonPath = "Data-Collection/Processed-Data/courses.json"
 errorPath = "Data-Collection/Processed-Data/errors.txt"
 
 courseInfoSections = ["Requisites:", "Course Designation:", "Learning Outcomes:", "Last Taught:", "Repeatable for Credit:"]
-usedCourseInfoSections = ["Credits", "Course Name", "Course Code", "Requisites", "Requisite String"]
+usedCourseInfoSections = ["Credits", "Course Name", "Course Code", "Requisites", "Requisite String", "Prohibited"]
 
 pdfToJson(pdfPath, jsonPath)
