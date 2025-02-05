@@ -30,7 +30,7 @@ export default function CourseNode({ data }: { data: Course }) {
     const [hasTaken, _] = useState(false);
     const {setSearchedCourse} = useContext(SearchContext);
     function handleClick() {
-        // setSearchedCourse(NUT9000);
+        setSearchedCourse(data);
         //setHasTaken(!hasTaken);
     }
 
