@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { testCourses } from "../../types/course";
+import { testCourses } from "../../data/course";
 import { Course, CourseNodeParams } from './courseNode';
 import { Edge, type Node } from '@xyflow/react';
 import ELK from 'elkjs/lib/elk.bundled.js'
