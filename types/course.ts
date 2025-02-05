@@ -2,12 +2,11 @@ import { type Node } from '@xyflow/react';
 import { type } from 'node:os';
 
 export type Course = {
-    id: number,
+    id: string,
     courseCode: string,
     courseName: string,
     desc: string,
     credits: number,
-    requisitesId: number[],
     requisites: string[],
     prohibited: string
 };
@@ -25,12 +24,11 @@ export function CourseNode(id: string, position: {x: number, y: number}, data: C
 }
 
 export const NUT9000: Course = {  
-    id: 69420,      
+    id: "69420",      
     courseCode: "NUT 9000",
     courseName: "Nutritional Science Grad Thesis",
     desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum consequuntur maiores reiciendis est enim natus ut iusto nulla, earum recusandae labore pariatur facere quaerat sint ea ullam cum, magni ratione!",
     credits: 69,
-    requisitesId: [1],
     requisites: [],
     prohibited: ""
 }
