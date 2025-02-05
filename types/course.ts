@@ -1,6 +1,6 @@
 import { Course } from '@/components/courseMap/courseNode';
 
-export const CS200: Course = {  
+const CS200: Course = {  
     id: "CS200",      
     courseCode: "CS 200",
     courseName: "PROGRAMMING I",
@@ -10,7 +10,7 @@ export const CS200: Course = {
     prohibited: ""
 }
 
-export const CS300: Course = {  
+const CS300: Course = {  
     id: "CS300",      
     courseCode: "CS 300",
     courseName: "PROGRAMMING II",
@@ -20,7 +20,7 @@ export const CS300: Course = {
     prohibited: ""
 }
 
-export const CS400: Course = {  
+const CS400: Course = {  
     id: "CS400",      
     courseCode: "CS 400",
     courseName: "PROGRAMMING III",
@@ -29,3 +29,74 @@ export const CS400: Course = {
     requisites: ["CS300"],
     prohibited: ""
 }
+
+const CS252: Course = {
+    id: "CS252",
+    courseCode: "CS 252",
+    courseName: "INTRODUCTION TO COMPUTER ENGINEERING",
+    desc: "Logic components built with transistors, rudimentary Boolean algebra, basic combinational logic design, basic synchronous sequential logic design, basic computer organization and design, introductory machine- and assembly-language programming.",
+    credits: 3,
+    requisites: [],
+    prohibited: ""
+}
+
+const CS354: Course = {
+    id: "CS354",
+    courseCode: "CS 354",
+    courseName: "MACHINE ORGANIZATION AND PROGRAMMING",
+    desc: "An introduction to fundamental structures of computer systems and the C programming language with a focus on the low-level interrelationships and impacts on performance. Topics include the virtual address space and virtual memory, the heap and dynamic memory management, the memory hierarchy and caching, assembly language and the stack, communication and interrupts/signals, compiling and assemblers/linkers.",
+    credits: 3,
+    requisites: ["CS252"],
+    prohibited: ""
+}
+
+const CS537: Course = {
+    id: "CS537",
+    courseCode: "CS 537",
+    courseName: "INTRODUCTION TO OPERATING SYSTEMS",
+    desc: "Input-output hardware, interrupt handling, properties of magnetic tapes, discs and drums, associative memories and virtual address translation techniques. Batch processing, time sharing and real-time systems, scheduling resource allocation, modular software systems, performance measurement and system evaluation.",
+    credits: 4,
+    requisites: ["CS354", "CS400"],
+    prohibited: ""
+}
+
+const MATH221: Course = {
+    id: "MATH221",
+    courseCode: "MATH 221",
+    courseName: "Calculus and Analytic Geometry 1",
+    desc: "Introduction to differential and integral calculus and plane analytic geometry; applications; transcendental functions.",
+    credits: 5,
+    requisites: [],
+    prohibited: ""
+}
+const MATH222: Course = {
+    id: "MATH222",
+    courseCode: "MATH 222",
+    courseName: "Calculus and Analytic Geometry 2",
+    desc: "Techniques of integration, improper integrals, first order ordinary differential equations, sequences and series, Taylor series, vector geometry in two and three dimensions.",
+    credits: 4,
+    requisites: ["MATH221"],
+    prohibited: ""
+}
+
+const CS240: Course = {
+    id: "CS240",
+    courseCode: "CS 240",
+    courseName: "Introduction to Discrete Mathematics",
+    desc: "Basic concepts of logic, sets, partial order and other relations, and functions. Basic concepts of mathematics (definitions, proofs, sets, functions, and relations) with a focus on discrete structures: integers, bits, strings, trees, and graphs. Propositional logic, Boolean algebra, and predicate logic. Mathematical induction and recursion. Invariants and algorithmic correctness. Recurrences and asymptotic growth analysis. Fundamentals of counting.",
+    credits: 3,
+    requisites: ["MATH222"],
+    prohibited: ""
+}
+
+const CS577: Course = {
+    id: "CS577",
+    courseCode: "CS 577",
+    courseName: "INTRODUCTION TO ALGORITHMS",
+    desc: "Basic paradigms for the design and analysis of efficient algorithms: greed, divide-and-conquer, dynamic programming, reductions, and the use of randomness. Computational intractability including typical NP-complete problems and ways to deal with them.",
+    credits: 4,
+    requisites: ["CS240", "CS400"],
+    prohibited: ""
+}
+
+export const testCourses = [CS200, CS300, CS400, CS252, CS354, MATH221, MATH222, CS240, CS577];

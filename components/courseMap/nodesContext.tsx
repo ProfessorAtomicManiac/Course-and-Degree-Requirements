@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { CS200, CS300, CS400 } from "../../types/course";
+import { testCourses } from "../../types/course";
 import { Course, CourseNodeParams } from './courseNode';
 import { Edge, type Node } from '@xyflow/react';
 import ELK from 'elkjs/lib/elk.bundled.js'
@@ -29,12 +29,11 @@ const width = 128; // px
 const height = 32; // px
 
 export default function NodesContextProvider({children}: {children: ReactNode}) {
-    const [nodes, setNodes] = useState<CourseNodeParams[]>([
-      CourseNodeParams(CS200.id, {x: 0, y: 0}, CS200),
-      CourseNodeParams(CS300.id, {x: 0, y: 0}, CS300),
-      CourseNodeParams(CS400.id, {x: 0, y: 0}, CS400),
-    ]);
-    const [edges, _] = useState<Edge[]>([]);
+    const [nodes, setNodes] = useState<CourseNodeParams[]>(
+      testCourses.map((course) => CourseNodeParams(course.id, {x: 0, y: 0}, course)
+    ));
+
+    const [edges, setEdges] = useState<Edge[]>([]);
     const elk = new ELK()
 
     let edgesELK = [];
@@ -86,6 +85,17 @@ const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
         );
       }
       setNodes(newNodes);
+      let newEdges = [];
+      for (let i = 0; i < layout.edges!.length; i++) {
+        newEdges.push(
+          {
+            id: layout.edges![i].id,
+            source: layout.edges![i].sources[0],
+            target: layout.edges![i].targets[0]
+          }
+        )
+      }
+      setEdges(newEdges);
       console.log(newNodes);
     }
 

@@ -1,6 +1,5 @@
 import { Handle, Position, type Node } from "@xyflow/react"
 import { useContext, useState } from "react"
-import { CS200, CS300, CS400 } from '../../types/course.ts'
 import { SearchContext } from "../search/searchContext.tsx";
 
 export type Course = {
