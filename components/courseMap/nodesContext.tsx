@@ -47,6 +47,9 @@ export default function NodesContextProvider({children}: {children: ReactNode}) 
         })
       }
     }
+
+    const paddingX = 100;
+    const paddingY = 50;
   
     const graph = {
       id: "root",
@@ -54,8 +57,8 @@ export default function NodesContextProvider({children}: {children: ReactNode}) 
       children: nodes.map((node) => {
         return {
           id: node.id,
-          width: width,
-          height: height
+          width: width + paddingX,
+          height: height + paddingY
         }
       }),
       edges: edgesELK
